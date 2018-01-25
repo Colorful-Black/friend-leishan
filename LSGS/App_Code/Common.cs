@@ -23,7 +23,7 @@ public class Common
     // 网络端数据库SQL
     public SqlConnection GetSQLConn()
     {
-        string sqlconn = "Server=bds257367202.my3w.com;User Id=bds257367202;Pwd=dl439353;DataBase=bds257367202_db";
+        string sqlconn = "Server=.;User Id=sa;Pwd=sa;DataBase=lsgs";    
         SqlConnection conn = new SqlConnection(sqlconn);
         conn.Open();
         if (conn.State.ToString() == "Open")
@@ -42,8 +42,8 @@ public class Common
     //string sqlconn = "Provider=Microsoft.Ace.OLEDB.12.0;Data Source='"+acpath+"'";
 
     //数据库用配置文件加密 web.config
-    private static string path = ConfigurationManager.AppSettings["OledbPath"].ToString();
-    private static string provide = ConfigurationManager.AppSettings["OledbConn"].ToString();
+    private  string path = ConfigurationManager.AppSettings["OledbPath"].ToString();
+    private  string provide = ConfigurationManager.AppSettings["OledbConn"].ToString();
 
     // 本地ACCESS数据库
     public OleDbConnection GetOLEDBConn()
@@ -130,6 +130,4 @@ public class Common
     //    ACSystemLog.Add(NewControl, newLog);
     //}
 
-}
-}
 }
