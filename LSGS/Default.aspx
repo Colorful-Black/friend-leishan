@@ -10,6 +10,17 @@
     <link href="CSS/main.css" rel="stylesheet" />
     <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <script src="JS/jquery-3.1.1.min.js"></script>
+    <script>
+        window.onload = function load() {
+            var _offset = sessionStorage.getItem("offsetTop");
+            $(document).scrollTop(_offset);
+        }
+        $(window).scroll(function () {
+            if ($(document).scrollTop() != 0) {
+                sessionStorage.setItem("offsetTop", $(window).scrollTop());//保存滚动位置
+            }
+        });
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
