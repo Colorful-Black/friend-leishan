@@ -17,7 +17,7 @@
 </body>
     <script>
         var bt = document.getElementById("TextBox1");
-        bt.onkeydown = search();
+        bt.onkeyup = search;
         function search() {
             var str=bt.value;
             var xmlhttp;
@@ -40,6 +40,7 @@
                 }
             }
             xmlhttp.open("GET", "Search.ashx?key=" + str, true);
+            xmlhttp.send();
 
             //var result = PinYin.GetFirstLetter(bt.value);
             //console.log(result);
