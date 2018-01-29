@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <title>无标题页</title>
-    <link href="../CSS/StyleSheet.css" rel="Stylesheet" type="text/css" />
+    <script src="../JS/jquery-3.1.1.min.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">

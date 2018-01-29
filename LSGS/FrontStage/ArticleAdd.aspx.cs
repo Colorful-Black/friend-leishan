@@ -15,6 +15,6 @@ public partial class FrontStage_ArticleAdd : System.Web.UI.Page
     protected void BtSumbit_Click(object sender, EventArgs e)
     {
         Common common = new Common();
-        common.ShowMessage(this.Page, FreeTextBox1.Text);
+        common.ShowMessage(this.Page, tbContent.Text);
     }
 }

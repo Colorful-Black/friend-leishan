@@ -11,17 +11,17 @@ using System.Web.UI.HtmlControls;
 
 public partial class UserManage_Register : System.Web.UI.Page
 {
-    UserManage usermanage = new UserManage();
-    ImageManage imagemanage = new ImageManage();
+    //UserManage usermanage = new UserManage();
+    //ImageManage imagemanage = new ImageManage();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
-            ddlPhoto.DataSource = imagemanage.GetAllPhoto("tb_Image").Tables[0].DefaultView;
-            ddlPhoto.DataTextField = "编号";
-            ddlPhoto.DataBind();
-            imagemanage.PhotoID = ddlPhoto.SelectedValue;
-            imgPhoto.ImageUrl = imagemanage.FindPhotoByID(imagemanage, "tb_Image").Tables[0].Rows[0][1].ToString();
+            //ddlPhoto.DataSource = imagemanage.GetAllPhoto("tb_Image").Tables[0].DefaultView;
+            //ddlPhoto.DataTextField = "编号";
+            //ddlPhoto.DataBind();
+            //imagemanage.PhotoID = ddlPhoto.SelectedValue;
+            //imgPhoto.ImageUrl = imagemanage.FindPhotoByID(imagemanage, "tb_Image").Tables[0].Rows[0][1].ToString();
         }
     }
     protected void btnTest_Click(object sender, EventArgs e)
@@ -32,16 +32,16 @@ public partial class UserManage_Register : System.Web.UI.Page
         }
         else
         {
-            usermanage.UserName = txtName.Text;
-            DataSet ds = usermanage.FindUserByName(usermanage, "tb_User");
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                Response.Write("<script language=javascript>alert('该用户已经存在！')</script>");
-                txtName.Text = string.Empty;
-                txtName.Focus();
-            }
-            else
-                Response.Write("<script language=javascript>alert('您可以使用该用户名进行注册！')</script>");
+            //usermanage.UserName = txtName.Text;
+            //DataSet ds = usermanage.FindUserByName(usermanage, "tb_User");
+            //if (ds.Tables[0].Rows.Count > 0)
+            //{
+            //    Response.Write("<script language=javascript>alert('该用户已经存在！')</script>");
+            //    txtName.Text = string.Empty;
+            //    txtName.Focus();
+            //}
+            //else
+            //    Response.Write("<script language=javascript>alert('您可以使用该用户名进行注册！')</script>");
         }
     }
     protected void btnSelDate_Click(object sender, EventArgs e)
@@ -61,46 +61,46 @@ public partial class UserManage_Register : System.Web.UI.Page
         }
         else
         {
-            usermanage.UserName = txtName.Text;
-            DataSet ds = usermanage.FindUserByName(usermanage, "tb_User");
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                Response.Write("<script language=javascript>alert('该用户已经存在！')</script>");
-                txtName.Text = string.Empty;
-                txtName.Focus();
-            }
-            else
-            {
-                usermanage.UserPwd = txtPwd.Text;
-                usermanage.TName = txtTName.Text;
-                if (ddlSex.SelectedIndex == 0)
-                    usermanage.Sex = true;
-                if (ddlSex.SelectedIndex == 1)
-                    usermanage.Sex = false;
-                usermanage.Birthday = DateTime.Parse(txtBirthday.Text);
-                usermanage.Tel = txtTel.Text;
-                usermanage.Mobile = txtMobile.Text;
-                try
-                {
-                    usermanage.QQ = Int32.Parse(txtQQ.Text);
-                }
-                catch
-                {
-                    txtQQ.Text=string.Empty;
-                    Response.Write("<script language=javascript>alert('QQ号码输入错误！')</script>");
-                    return;
-                }
-                imagemanage.PhotoID = ddlPhoto.SelectedValue;
-                usermanage.Photo = imagemanage.FindPhotoByID(imagemanage, "tb_Image").Tables[0].Rows[0][1].ToString();
-                usermanage.Email = txtEmail.Text;
-                usermanage.FAddress = txtHAddress.Text;
-                usermanage.RAddress = txtRAddress.Text;
-                usermanage.Index = txtIndex.Text;
-                usermanage.AddUser(usermanage);
-                Response.Write("<script language=javascript>alert('用户注册成功！')</script>");
-                txtName.Text = txtPwd.Text = txtSPwd.Text = txtTName.Text = txtBirthday.Text = txtTel.Text
-                    = txtMobile.Text = txtQQ.Text = txtEmail.Text = txtHAddress.Text = txtRAddress.Text = txtIndex.Text = string.Empty;
-            }
+            //usermanage.UserName = txtName.Text;
+            //DataSet ds = usermanage.FindUserByName(usermanage, "tb_User");
+            //if (ds.Tables[0].Rows.Count > 0)
+            //{
+            //    Response.Write("<script language=javascript>alert('该用户已经存在！')</script>");
+            //    txtName.Text = string.Empty;
+            //    txtName.Focus();
+            //}
+            //else
+            //{
+            //    usermanage.UserPwd = txtPwd.Text;
+            //    usermanage.TName = txtTName.Text;
+            //    if (ddlSex.SelectedIndex == 0)
+            //        usermanage.Sex = true;
+            //    if (ddlSex.SelectedIndex == 1)
+            //        usermanage.Sex = false;
+            //    usermanage.Birthday = DateTime.Parse(txtBirthday.Text);
+            //    usermanage.Tel = txtTel.Text;
+            //    usermanage.Mobile = txtMobile.Text;
+            //    try
+            //    {
+            //        usermanage.QQ = Int32.Parse(txtQQ.Text);
+            //    }
+            //    catch
+            //    {
+            //        txtQQ.Text=string.Empty;
+            //        Response.Write("<script language=javascript>alert('QQ号码输入错误！')</script>");
+            //        return;
+            //    }
+            //    imagemanage.PhotoID = ddlPhoto.SelectedValue;
+            //    usermanage.Photo = imagemanage.FindPhotoByID(imagemanage, "tb_Image").Tables[0].Rows[0][1].ToString();
+            //    usermanage.Email = txtEmail.Text;
+            //    usermanage.FAddress = txtHAddress.Text;
+            //    usermanage.RAddress = txtRAddress.Text;
+            //    usermanage.Index = txtIndex.Text;
+            //    usermanage.AddUser(usermanage);
+            //    Response.Write("<script language=javascript>alert('用户注册成功！')</script>");
+            //    txtName.Text = txtPwd.Text = txtSPwd.Text = txtTName.Text = txtBirthday.Text = txtTel.Text
+            //        = txtMobile.Text = txtQQ.Text = txtEmail.Text = txtHAddress.Text = txtRAddress.Text = txtIndex.Text = string.Empty;
+            //}
         }
     }
     protected void btnCancel_Click(object sender, EventArgs e)
@@ -110,7 +110,7 @@ public partial class UserManage_Register : System.Web.UI.Page
     }
     protected void ddlPhoto_SelectedIndexChanged(object sender, EventArgs e)
     {
-        imagemanage.PhotoID = ddlPhoto.SelectedValue;
-        imgPhoto.ImageUrl = imagemanage.FindPhotoByID(imagemanage, "tb_Image").Tables[0].Rows[0][1].ToString();
+        //imagemanage.PhotoID = ddlPhoto.SelectedValue;
+        //imgPhoto.ImageUrl = imagemanage.FindPhotoByID(imagemanage, "tb_Image").Tables[0].Rows[0][1].ToString();
     }
 }
