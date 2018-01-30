@@ -1,6 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ArticleAdd.aspx.cs" ValidateRequest="false" Inherits="FrontStage_ArticleAdd" %>
 
-<%@ Register TagPrefix="FTB" Namespace="FreeTextBoxControls" Assembly="FreeTextBox" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -41,8 +40,8 @@
     <form id="form1" runat="server">
         <div>
             <div>
-                类型：<asp:DropDownList ID="ddlCategory" runat="server">
-                </asp:DropDownList><br />
+                类型：<br /><asp:DropDownList ID="ddlCategory" runat="server">
+                </asp:DropDownList>
                 <br />
                 标题：<asp:TextBox ID="tbTitle" runat="server" CssClass="textInput"></asp:TextBox><br />
                 <br />
