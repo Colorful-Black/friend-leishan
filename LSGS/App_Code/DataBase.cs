@@ -41,7 +41,7 @@ public class DataBase
             SqlConnection conn = GetSQLConn();
             conn.Open();
             SqlCommand cmd = new SqlCommand(sql, conn);
-            return cmd.ExecuteNonQuery()>0;
+            return (int)cmd.ExecuteScalar()>0;
         }
         catch (Exception)
         {

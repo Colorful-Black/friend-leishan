@@ -19,7 +19,16 @@ public partial class FrontStage_Login : System.Web.UI.Page
         {
             if(TbPwd.Text == "admin")
             {
-                common.ShowMessage(this.Page, @"友情提示,登录成功!\n虽然并没有什么用.");
+                string sql = "select count(*) from tbuser where username='" + TbName.Text + "' and userpwd='" + TbPwd.Text + "'";
+                if((new DataBase()).GetDataSel(sql))
+                {
+                    common.ShowMessage(this.Page, @"友情提示,登录成功!");
+                    Response.Redirect("ArticleAdd.aspx");
+                }
+                else
+                {
+                    common.ShowMessage(this.Page, "未知原因，登录失败!");
+                }
             }
             else
             {

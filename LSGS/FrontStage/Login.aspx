@@ -24,6 +24,7 @@
                     return true;
                 else {
                     alert("账号或密码错误！");
+                    return false;
                 }
             }
         }
@@ -38,7 +39,7 @@
                 账号：<asp:TextBox ID="TbName" runat="server"></asp:TextBox><br />
             </div>
             <div class="password">
-                密码：<asp:TextBox ID="TbPwd" runat="server"></asp:TextBox><br />
+                密码：<asp:TextBox ID="TbPwd" runat="server" TextMode="Password"></asp:TextBox><br />
             </div>
             <div class="remember">
                 <input id="remember" type="checkbox" name="remember" tabindex="4" />
