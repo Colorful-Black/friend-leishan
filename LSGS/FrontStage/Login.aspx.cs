@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -9,6 +11,7 @@ public partial class FrontStage_Login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        
 
     }
 
@@ -23,7 +26,7 @@ public partial class FrontStage_Login : System.Web.UI.Page
                 if((new DataBase()).GetDataSel(sql))
                 {
                     common.ShowMessage(this.Page, @"友情提示,登录成功!");
-                    Response.Redirect("ArticleAdd.aspx");
+                    //Response.Redirect("ArticleAdd.aspx");
                 }
                 else
                 {
