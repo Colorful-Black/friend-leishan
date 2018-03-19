@@ -23,19 +23,24 @@ public partial class BackStage_UpFile : System.Web.UI.Page
                 string filepath = Server.MapPath("~/Images//test/");
                 string filename = DateTime.Now.ToString("yyyy-MM-dd") + FileUpload1.PostedFile.FileName;
 
-                FileUpload1.SaveAs(filepath + filename);
-                
-                myclass.ShowMessage(this.Page,"上传成功!");
+                if (FileUpload1.PostedFile.ContentLength > 100 * 1024 * 1024)
+                {
+                    myclass.ShowMessage(this.Page, "上传文件超过了200M");
+                }
+                else
+                {
+                    FileUpload1.SaveAs(filepath + filename);
+                    myclass.ShowMessage(this.Page, "上传成功!");
+                }
             }
             else
             {
                 myclass.ShowMessage(this.Page, "还未选择上传文件!");
             }
-
         }
         catch (Exception ex)
         {
-            Response.Write("error: "+ ex.Message);
+            Response.Write("error: " + ex.Message);
         }
     }
 }
