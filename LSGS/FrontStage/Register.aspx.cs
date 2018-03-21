@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
+using System.Data.SqlClient;
 
 public partial class UserManage_Register : System.Web.UI.Page
 {
@@ -17,11 +18,7 @@ public partial class UserManage_Register : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            //ddlPhoto.DataSource = imagemanage.GetAllPhoto("tb_Image").Tables[0].DefaultView;
-            //ddlPhoto.DataTextField = "编号";
-            //ddlPhoto.DataBind();
-            //imagemanage.PhotoID = ddlPhoto.SelectedValue;
-            //imgPhoto.ImageUrl = imagemanage.FindPhotoByID(imagemanage, "tb_Image").Tables[0].Rows[0][1].ToString();
+            
         }
     }
     protected void btnTest_Click(object sender, EventArgs e)
@@ -29,29 +26,32 @@ public partial class UserManage_Register : System.Web.UI.Page
         if (txtName.Text == string.Empty)
         {
             Response.Write("<script language=javascript>alert('用户名不能为空！')</script>");
-        }
-        else
-        {
-            //usermanage.UserName = txtName.Text;
-            //DataSet ds = usermanage.FindUserByName(usermanage, "tb_User");
-            //if (ds.Tables[0].Rows.Count > 0)
-            //{
-            //    Response.Write("<script language=javascript>alert('该用户已经存在！')</script>");
-            //    txtName.Text = string.Empty;
-            //    txtName.Focus();
-            //}
-            //else
-            //    Response.Write("<script language=javascript>alert('您可以使用该用户名进行注册！')</script>");
-        }
-    }
+		}
+		else
+		{
+			Common myclass = new Common();
+			string UserName = txtName.Text;
+			DataBase db = new DataBase();
+			if (db.ReName(UserName))
+			{
+				myclass.ShowMessage(this.Page, "该用户已经存在！");
+				txtName.Text = string.Empty;
+				txtName.Focus();
+			}
+			else
+			{
+				myclass.ShowMessage(this.Page, "该用户尚未注册，可以使用.");
+			}
+		}
+	}
     protected void btnSelDate_Click(object sender, EventArgs e)
     {
-        calDate.Visible = true;
+        //calDate.Visible = true;
     }
     protected void calDate_SelectionChanged(object sender, EventArgs e)
     {
-        txtBirthday.Text = calDate.SelectedDate.ToShortDateString();
-        calDate.Visible = false;
+        //txtBirthday.Text = calDate.SelectedDate.ToShortDateString();
+        //calDate.Visible = false;
     }
     protected void btnReg_Click(object sender, EventArgs e)
     {
@@ -59,54 +59,24 @@ public partial class UserManage_Register : System.Web.UI.Page
         {
             Response.Write("<script language=javascript>alert('用户名不能为空！')</script>");
         }
-        else
-        {
-            //usermanage.UserName = txtName.Text;
-            //DataSet ds = usermanage.FindUserByName(usermanage, "tb_User");
-            //if (ds.Tables[0].Rows.Count > 0)
-            //{
-            //    Response.Write("<script language=javascript>alert('该用户已经存在！')</script>");
-            //    txtName.Text = string.Empty;
-            //    txtName.Focus();
-            //}
-            //else
-            //{
-            //    usermanage.UserPwd = txtPwd.Text;
-            //    usermanage.TName = txtTName.Text;
-            //    if (ddlSex.SelectedIndex == 0)
-            //        usermanage.Sex = true;
-            //    if (ddlSex.SelectedIndex == 1)
-            //        usermanage.Sex = false;
-            //    usermanage.Birthday = DateTime.Parse(txtBirthday.Text);
-            //    usermanage.Tel = txtTel.Text;
-            //    usermanage.Mobile = txtMobile.Text;
-            //    try
-            //    {
-            //        usermanage.QQ = Int32.Parse(txtQQ.Text);
-            //    }
-            //    catch
-            //    {
-            //        txtQQ.Text=string.Empty;
-            //        Response.Write("<script language=javascript>alert('QQ号码输入错误！')</script>");
-            //        return;
-            //    }
-            //    imagemanage.PhotoID = ddlPhoto.SelectedValue;
-            //    usermanage.Photo = imagemanage.FindPhotoByID(imagemanage, "tb_Image").Tables[0].Rows[0][1].ToString();
-            //    usermanage.Email = txtEmail.Text;
-            //    usermanage.FAddress = txtHAddress.Text;
-            //    usermanage.RAddress = txtRAddress.Text;
-            //    usermanage.Index = txtIndex.Text;
-            //    usermanage.AddUser(usermanage);
-            //    Response.Write("<script language=javascript>alert('用户注册成功！')</script>");
-            //    txtName.Text = txtPwd.Text = txtSPwd.Text = txtTName.Text = txtBirthday.Text = txtTel.Text
-            //        = txtMobile.Text = txtQQ.Text = txtEmail.Text = txtHAddress.Text = txtRAddress.Text = txtIndex.Text = string.Empty;
-            //}
-        }
-    }
-    protected void btnCancel_Click(object sender, EventArgs e)
-    {
-        txtName.Text = txtPwd.Text = txtSPwd.Text = txtTName.Text = txtBirthday.Text = txtTel.Text
-            = txtMobile.Text = txtQQ.Text = txtEmail.Text = txtHAddress.Text = txtRAddress.Text = txtIndex.Text = string.Empty;
+		else
+		{
+			DataBase db = new DataBase();
+			Common myclass = new Common();
+			SqlParameter p1 = new SqlParameter("@userid", Guid.NewGuid().ToString());
+			SqlParameter p2 = new SqlParameter("@useraccount", this.txtName.Text);
+			SqlParameter p3 = new SqlParameter("@userpwd", this.txtSPwd.Text);
+
+			string error = db.UpdateByParameter("INSERT INTO tbuser(userid,useraccount,userpwd,username,grade,isable) VALUES(@userid,@useraccount,@userpwd,@useraccount,1,1)", new SqlParameter[] { p1, p2, p3 });
+			if(error == "")
+			{
+				myclass.ShowMessage(this.Page, "添加成功,完成注册");
+			}
+			else
+			{
+				myclass.ShowMessage(this.Page, "注册失败,原因:" + error);
+			}
+		}
     }
     protected void ddlPhoto_SelectedIndexChanged(object sender, EventArgs e)
     {

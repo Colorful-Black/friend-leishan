@@ -6,6 +6,7 @@ using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
 
 public partial class FrontStage_Login : System.Web.UI.Page
 {
@@ -22,11 +23,17 @@ public partial class FrontStage_Login : System.Web.UI.Page
         {
             if(TbPwd.Text == "admin")
             {
-                string sql = "select count(*) from tbuser where username='" + TbName.Text + "' and userpwd='" + TbPwd.Text + "'";
-                if((new DataBase()).GetDataSel(sql))
+				DataBase db = new DataBase();
+				SqlParameter p1 = new SqlParameter("@useraccount", TbName.Text);
+				SqlParameter p2 = new SqlParameter("@userpwd", TbPwd.Text);
+				string sql = "select count(*) from tbuser where username=@useraccount and userpwd=@userpwd";
+
+				DataTable dt = db.SelectByParameter(sql, new SqlParameter[] { p1, p2 }).Tables[0];
+
+                if(dt.Rows.Count > 0)
                 {
                     common.ShowMessage(this.Page, @"友情提示,登录成功!");
-                    //Response.Redirect("ArticleAdd.aspx");
+                    Response.Redirect("ArticleAdd.aspx");
                 }
                 else
                 {

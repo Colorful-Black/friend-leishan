@@ -40,8 +40,8 @@
     <form id="form1" runat="server">
         <div>
             <div>
-                类型：<br /><asp:DropDownList ID="ddlCategory" runat="server">
-                </asp:DropDownList>
+               <%-- 类型：<br /><asp:DropDownList ID="ddlCategory" runat="server">
+                </asp:DropDownList>--%>
                 <br />
                 标题：<asp:TextBox ID="tbTitle" runat="server" CssClass="textInput"></asp:TextBox><br />
                 <br />
@@ -54,6 +54,8 @@
             </div>
             <br />
             <asp:Button ID="BtSumbit" runat="server" Text="提交" CssClass="btn" OnClick="BtSumbit_Click" />
+            <asp:HiddenField ID="hdTextID" runat="server" />
+            <asp:HiddenField ID="hdImageID" runat="server" />
         </div>
     </form>
 </body>
