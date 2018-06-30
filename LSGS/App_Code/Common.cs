@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Linq;
@@ -17,52 +18,10 @@ public class Common
         //
         // TODO: 在此处添加构造函数逻辑
         //
-    }   
-
-
-    // 网络端数据库SQL
-    public SqlConnection GetSQLConn()
-    {
-        string sqlconn = "Server=.;User Id=sa;Pwd=sa;DataBase=lsgs";    
-        SqlConnection conn = new SqlConnection(sqlconn);
-        conn.Open();
-        if (conn.State.ToString() == "Open")
-        {
-            //conn.Close();
-            return conn;
-        }
-        else
-        {
-            //conn.Close();
-            return null;
-        }
     }
 
-    //string acpath =  System.Web.HttpContext.Current.Server.MapPath("~/App_Data/test.accdb");
-    //string sqlconn = "Provider=Microsoft.Ace.OLEDB.12.0;Data Source='"+acpath+"'";
 
-    //数据库用配置文件加密 web.config
-    private  string path = ConfigurationManager.AppSettings["OledbPath"].ToString();
-    private  string provide = ConfigurationManager.AppSettings["OledbConn"].ToString();
-
-    // 本地ACCESS数据库
-    public OleDbConnection GetOLEDBConn()
-    {
-        string sqlconn = provide + System.Web.HttpContext.Current.Server.MapPath(path);
-        OleDbConnection conn = new OleDbConnection(sqlconn);
-        conn.Open();
-        if (conn.State.ToString() == "Open")
-        {
-            //conn.Close();
-            return conn;
-        }
-        else
-        {
-            //conn.Close();
-            return null;
-        }
-    }
-
+    //js脚本
     /// <summary>
     /// JS弹出对话框
     /// </summary>
@@ -72,39 +31,7 @@ public class Common
     {
         ScriptManager.RegisterClientScriptBlock(page, this.GetType(), "click", "alert('" + str + "')", true);
     }
-
-    /// <summary>
-    /// 控制台输出
-    /// </summary>
-    /// <param name="指定页面"></param>
-    /// <param name="输出内容"></param>
-    public void ShowConsole(System.Web.UI.Page page, string str)
-    {
-        ScriptManager.RegisterClientScriptBlock(page, this.GetType(), "click", "console.log('" + str + "')", true);
-    }
-
-    /// <summary>
-    /// 重名检测
-    /// </summary>
-    /// <param name="name">用户名</param>
-    /// <returns>是否重名</returns>
-    public bool ReName(string name)
-    {
-        string sqlconn = provide + System.Web.HttpContext.Current.Server.MapPath(path);
-        OleDbConnection conn = new OleDbConnection(sqlconn);
-        conn.Open();
-        string sel = "select * from tbUser where UserID='" + name + "'";
-        OleDbCommand cmd = new OleDbCommand(sel, conn);
-        OleDbDataReader dr = cmd.ExecuteReader();
-        if (dr.Read())
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
+    
 
     ///// <summary>
     ///// 新增操作日志
@@ -129,5 +56,29 @@ public class Common
     //    newLog.Log = log;
     //    ACSystemLog.Add(NewControl, newLog);
     //}
+
+    #region Oledb数据库 暂时用不上了
+    //数据库用配置文件加密 web.config
+    private string path = ConfigurationManager.AppSettings["OledbPath"].ToString();
+    private string provide = ConfigurationManager.AppSettings["OledbConn"].ToString();
+
+    // 本地ACCESS数据库
+    public OleDbConnection GetOLEDBConn()
+    {
+        string oledbconn = provide + System.Web.HttpContext.Current.Server.MapPath(path);
+        OleDbConnection conn = new OleDbConnection(oledbconn);
+        conn.Open();
+        if (conn.State.ToString() == "Open")
+        {
+            //conn.Close();
+            return conn;
+        }
+        else
+        {
+            //conn.Close();
+            return null;
+        }
+    }
+    #endregion
 
 }
