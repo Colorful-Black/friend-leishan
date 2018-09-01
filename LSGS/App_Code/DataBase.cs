@@ -174,7 +174,8 @@ public class DataBase
 			SqlDataAdapter sda = new SqlDataAdapter(cmd);
 			DataSet ds = new DataSet();
 			sda.Fill(ds);
-			return ds;
+            cmd.Parameters.Clear();
+            return ds;
 		}
 		catch (Exception ex)
 		{
@@ -185,6 +186,6 @@ public class DataBase
 		{
 			con.Close();
 			con.Dispose();
-		}
+        }
 	}
 }

@@ -30,7 +30,7 @@
         }
     </script>
 </head>
-<body style="background: url('../Images/background.jpg')">
+<body style="background: url('../Images/background.jpg') no-repeat; background-size: cover;">
     <form id="form1" runat="server">
         <div class="login-box">
 
@@ -45,7 +45,7 @@
                 <input id="remember" type="checkbox" name="remember" tabindex="4" />
                 <label>记住密码</label>
             </div>
-            <asp:Button ID="BtLogin" runat="server" Text="登录" OnClientClick="return SumbitCheck()" OnClick="BtLogin_Click" CssClass="bt" />
+            <asp:Button ID="BtLogin" runat="server" Text="登录"  OnClick="BtLogin_Click" CssClass="bt" />
             <br /><br /><br />
             <asp:LinkButton ID="LinkButton1" runat="server"><span style="color:red;">忘记密码</span></asp:LinkButton>
             <a href="../Default.aspx">返回首页</a>
